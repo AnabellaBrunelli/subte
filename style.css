@@ -147,22 +147,24 @@ HERO
 .hero-box{
 
     width:100%;
-
     max-width:1250px;
 
-    background:linear-gradient(
-        90deg,
-        #031018,
-        #041628
-    );
+    background:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+        url("fondo.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 
     border:1px solid #102040;
-
     border-radius:30px;
 
     padding:80px 40px;
 
     text-align:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
 
 }
 
@@ -1006,3 +1008,27 @@ RESPONSIVE CELULAR
     }
 
 }
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo h1 {
+    margin: 0;
+}
+
+.logo-img {
+    width: 55px;   /* podés probar 50, 60 o 65 */
+    height: auto;
+}
+.descripcion{
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    max-width: 900px;
+    margin: 35px auto;
+    line-height: 1.7;
+}
+
