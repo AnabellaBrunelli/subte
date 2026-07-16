@@ -2,142 +2,53 @@
 // CREAR MAPA
 // ==========================
 
-const map = L.map('map').setView([-34.5905, -58.4100], 12);
+const map = L.map('map');
 
 // ==========================
 // MAPA BASE
 // ==========================
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-
-    attribution: '© OpenStreetMap'
-
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; OpenStreetMap &copy; CARTO',
+    subdomains: 'abcd',
+    maxZoom: 20
 }).addTo(map);
-
 // ==========================
-// RECORRIDO LINEA D
-// ==========================
-
-const lineaD = [
-
-    [-34.5777, -58.3816], // Congreso de Tucumán
-    [-34.5810, -58.3850], // Juramento
-    [-34.5882, -58.3925], // José Hernández
-    [-34.5947, -58.3971], // Olleros
-    [-34.5994, -58.4014], // Ministro Carranza
-    [-34.6037, -58.4038], // Palermo
-    [-34.5889, -58.4102], // Plaza Italia
-    [-34.5856, -58.4150], // Scalabrini Ortiz
-    [-34.5817, -58.4210], // Bulnes
-    [-34.5772, -58.4260], // Agüero
-    [-34.5730, -58.4305], // Pueyrredón
-    [-34.5684, -58.4370], // Facultad de Medicina
-    [-34.5632, -58.4442], // Callao
-    [-34.5585, -58.4505], // Tribunales
-    [-34.5530, -58.4560], // 9 de Julio
-    [-34.5477, -58.4620]  // Catedral
-
-];
-
-// ==========================
-// DIBUJAR LINEA
-// ==========================
-
-L.polyline(lineaD, {
-
-    color:'#0a8f3d',
-    weight:8,
-    opacity:0.9
-
-}).addTo(map);
-
-// ==========================
-// ESTACIONES
+// ESTACIONES LÍNEA D
 // ==========================
 
 const estaciones = [
 
-    {
-        nombre:"Congreso de Tucumán",
-        coords:[-34.5777, -58.3816]
-    },
-
-    {
-        nombre:"Juramento",
-        coords:[-34.5810, -58.3850]
-    },
-
-    {
-        nombre:"José Hernández",
-        coords:[-34.5882, -58.3925]
-    },
-
-    {
-        nombre:"Olleros",
-        coords:[-34.5947, -58.3971]
-    },
-
-    {
-        nombre:"Ministro Carranza",
-        coords:[-34.5994, -58.4014]
-    },
-
-    {
-        nombre:"Palermo",
-        coords:[-34.6037, -58.4038]
-    },
-
-    {
-        nombre:"Plaza Italia",
-        coords:[-34.5889, -58.4102]
-    },
-
-    {
-        nombre:"Scalabrini Ortiz",
-        coords:[-34.5856, -58.4150]
-    },
-
-    {
-        nombre:"Bulnes",
-        coords:[-34.5817, -58.4210]
-    },
-
-    {
-        nombre:"Agüero",
-        coords:[-34.5772, -58.4260]
-    },
-
-    {
-        nombre:"Pueyrredón",
-        coords:[-34.5730, -58.4305]
-    },
-
-    {
-        nombre:"Facultad de Medicina",
-        coords:[-34.5684, -58.4370]
-    },
-
-    {
-        nombre:"Callao",
-        coords:[-34.5632, -58.4442]
-    },
-
-    {
-        nombre:"Tribunales",
-        coords:[-34.5585, -58.4505]
-    },
-
-    {
-        nombre:"9 de Julio",
-        coords:[-34.5530, -58.4560]
-    },
-
-    {
-        nombre:"Catedral",
-        coords:[-34.5477, -58.4620]
-    }
+    { nombre: "Catedral", coords: [-34.6075, -58.3743] },
+    { nombre: "9 de Julio", coords: [-34.6043, -58.3806] },
+    { nombre: "Tribunales", coords: [-34.6016, -58.3854] },
+    { nombre: "Callao", coords: [-34.5992, -58.3920] },
+    { nombre: "Facultad de Medicina", coords: [-34.5971, -58.3973] },
+    { nombre: "Pueyrredón", coords: [-34.5942, -58.4027] },
+    { nombre: "Agüero", coords: [-34.5911, -58.4088] },
+    { nombre: "Bulnes", coords: [-34.5881, -58.4147] },
+    { nombre: "Scalabrini Ortiz", coords: [-34.5848, -58.4208] },
+    { nombre: "Plaza Italia", coords: [-34.5819, -58.4259] },
+    { nombre: "Palermo", coords: [-34.5789, -58.4318] },
+    { nombre: "Ministro Carranza", coords: [-34.5754, -58.4377] },
+    { nombre: "Olleros", coords: [-34.5718, -58.4443] },
+    { nombre: "José Hernández", coords: [-34.5678, -58.4516] },
+    { nombre: "Juramento", coords: [-34.5638, -58.4587] },
+    { nombre: "Congreso de Tucumán", coords: [-34.5568, -58.4656] }
 
 ];
+
+// ==========================
+// DIBUJAR LÍNEA
+// ==========================
+
+const recorrido = estaciones.map(estacion => estacion.coords);
+
+const linea = L.polyline(recorrido, {
+    color: "#0a8f3d",
+    weight: 6,
+    opacity: 1
+}).addTo(map);
 
 // ==========================
 // MARCADORES
@@ -146,23 +57,31 @@ const estaciones = [
 estaciones.forEach(estacion => {
 
     L.circleMarker(estacion.coords, {
-
-        radius:8,
-        fillColor:"#0a8f3d",
-        color:"#ffffff",
-        weight:2,
-        fillOpacity:1
-
+        radius: 7,
+        fillColor: "#0a8f3d",
+        color: "#ffffff",
+        weight: 2,
+        fillOpacity: 1
     })
-
     .addTo(map)
+    .bindPopup(`<strong>${estacion.nombre}</strong><br>Línea D`);
 
-    .bindPopup(`
+});
 
-        <h3>${estacion.nombre}</h3>
+// ==========================
+// AJUSTAR VISTA
+// ==========================
 
-        <p>Estación Línea D</p>
+map.fitBounds(linea.getBounds(), {
+    padding: [40, 40]
+});
 
-    `);
+// ==========================
+// ACTUALIZAR TAMAÑO
+// ==========================
 
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 300);
 });
