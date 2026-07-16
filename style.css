@@ -998,13 +998,14 @@ RESPONSIVE CELULAR
 
     /* FOOTER */
 
-    footer{
+   footer{
+    font-size:13px;
+    padding:8px 20px;
+}
 
-        font-size:14px;
-
-        padding:20px;
-
-    }
+.footer-logo{
+    width:30px;
+}
 
 }
 .logo {
@@ -1031,3 +1032,31 @@ RESPONSIVE CELULAR
     line-height: 1.7;
 }
 
+.footer-logo{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-bottom:10px;
+}
+
+.footer-logo-img{
+    width:35px;
+    height:auto;
+}
+
+.footer-logo h2{
+    font-size:28px;
+    margin:0;
+    color:white;
+}
+
+.footer-logo span{
+    color:#f39c12;
+}
+
+footer p{
+    text-align:center;
+    font-size:14px;
+    margin:0;
+}
